@@ -1,6 +1,7 @@
 import csv
 
-def lees_nis_bestand():
+
+def _lees_nis_bestand():
     BESTANDSNAAM = '../REFNIS_2019.csv'
     NIS_CODE = 'Code NIS'
     GEMEENTENAAM = 'Administratieve eenheden'
@@ -26,18 +27,15 @@ def lees_nis_bestand():
         print(f"{aantal_gemeenten} gemeenten ingelezen")
     return gemeenten
 
+_gemeenten = {}
 def zoek_gemeente(gemeentenaam):
-    gemeenten = lees_nis_bestand()
+    global _gemeenten
+    if len(_gemeenten) == 0:
+        _gemeenten = _lees_nis_bestand()
     naam = gemeentenaam.upper()
     try:
-        code = gemeenten[naam.upper()]
+        code = _gemeenten[naam.upper()]
         return code
     except KeyError:
         return False
 
-naam = input("Geef gemeentenaam: ")
-code = zoek_gemeente(naam)
-if code:
-    print(f"De NIS-code van {naam} is {code}")
-else:
-    print(f"Gemeente {naam} is niet gevonden.")
