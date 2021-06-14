@@ -1,4 +1,5 @@
-import csv
+import csv, logging
+
 
 
 def _lees_nis_bestand():
@@ -24,7 +25,7 @@ def _lees_nis_bestand():
                 nis_code = record[NIS_CODE]
                 gemeentenaam = record[GEMEENTENAAM].upper()
                 gemeenten[gemeentenaam] = nis_code
-        print(f"{aantal_gemeenten} gemeenten ingelezen")
+        logging.debug("%d  gemeenten ingelezen", aantal_gemeenten)
     return gemeenten
 
 _gemeenten = {}
@@ -33,9 +34,21 @@ def zoek_gemeente(gemeentenaam):
     if len(_gemeenten) == 0:
         _gemeenten = _lees_nis_bestand()
     naam = gemeentenaam.upper()
+    logging.debug("Zoek gemeente %s.", naam)
     try:
-        code = _gemeenten[naam.upper()]
+        code = _gemeenten[naam]
         return code
     except KeyError:
+        logging.debug("Gemeente %s niet gevonden.", naam)
         return False
 
+
+if __name__ == '__main__':
+    logging.basicConfig(level = logging.DEBUG)
+    for _ in range(2):
+        naam = input("Geef gemeentenaam: ")
+        code = zoek_gemeente(naam)
+        if code:
+            logging.debug("code is %s", code)
+        else:
+            logging.debug("%s is niet gevonden", naam)
