@@ -26,7 +26,18 @@ def lees_nis_bestand():
         print(f"{aantal_gemeenten} gemeenten ingelezen")
     return gemeenten
 
-gemeenten = lees_nis_bestand()
+def zoek_gemeente(gemeentenaam):
+    gemeenten = lees_nis_bestand()
+    naam = gemeentenaam.upper()
+    try:
+        code = gemeenten[naam.upper()]
+        return code
+    except KeyError:
+        return False
+
 naam = input("Geef gemeentenaam: ")
-code = gemeenten[naam.upper()]
-print(f"Gemeente {naam} heeft als NIS code {code}")
+code = zoek_gemeente(naam)
+if code:
+    print(f"De NIS-code van {naam} is {code}")
+else:
+    print(f"Gemeente {naam} is niet gevonden.")
