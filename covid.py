@@ -7,8 +7,8 @@ def main():
     if code:
         print(f"De NIS-code van {naam} is {code}")
     else:
-        print(f"Gemeente {naam} is niet gevonden.")
+         print(f"Gemeente {naam} is niet gevonden.")
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(filename='covid.log',level=logging.ERROR)
     main()
