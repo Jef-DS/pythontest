@@ -1,0 +1,1 @@
+In dit project proberen we met behulp van Python de COVID-gegevens van Sciensano te lezen. Aan de hand van de verschillende tags en de commit commentaar kan je zien hoe de applicatie stap-voor-stap wordt opgebouwd.
