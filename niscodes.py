@@ -6,5 +6,4 @@ with open(BESTANDSNAAM, mode='r', encoding='utf_8_sig') as csvfile:
     for _ in range(5):
         regel = csvfile.readline()
     items = regel.split(';')  # scheidingsteken is ';'
-    for item in items:
-        print(item)           # print de gegevens van Anderlecht
+    print(items[3], items[4])          # print de NIS-code en de naam van Anderlecht
